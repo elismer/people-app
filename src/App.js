@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Avatar from "./components/avatar";
+import Count from "./components/counter";
 
-function App() {
+function App({ name }) {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Avatar className="App-Logo" />
+        <p>Hola {name}</p>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -15,9 +17,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn more about React
         </a>
       </header>
+      <Count />
     </div>
   );
 }
