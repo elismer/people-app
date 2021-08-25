@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Avatar from "./components/avatar";
 import Count from "./components/counter";
-
+import Person from "./components/person";
 const name = "Juan";
+
 ReactDOM.render(
   <React.StrictMode>
+    <App />
     <Count />
+    <Person />
   </React.StrictMode>,
   document.getElementById("root")
 );
