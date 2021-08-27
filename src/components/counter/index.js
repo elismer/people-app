@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-export default function Count() {
-  const [count, setCount] = useState(0);
+export default function Count({ init }) {
+  const [count, setCount] = useState(init);
 
   const handleClick = (type) => {
     type === "suma" ? setCount(count + 1) : setCount(count - 1);

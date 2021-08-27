@@ -1,18 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import People from "./pages/People";
 import reportWebVitals from "./reportWebVitals";
-import Avatar from "./components/avatar";
-import Count from "./components/counter";
-import Person from "./components/person";
-const name = "Juan";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-    <Count />
-    <Person />
+    <People />
   </React.StrictMode>,
   document.getElementById("root")
 );
