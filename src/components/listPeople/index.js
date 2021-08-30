@@ -1,15 +1,13 @@
 import React from "react";
-import Person from "../person";
 
-export default function ListPeople({ data }) {
+export default function ListPeople({ data, handleClick }) {
   return (
     <div>
       <ul>
-        {data.map((person) => {
-          const { id, ...info } = person;
+        {data.map((person, index) => {
           return (
-            <li key={id}>
-              <Person {...info} />
+            <li key={index} onClick={() => handleClick(person)}>
+              <p> Nombre: {person.first_name} </p>
             </li>
           );
         })}

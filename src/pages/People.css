@@ -1,0 +1,10 @@
+.list {
+  display: flex;
+}
+
+.personItem {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 300px;
+  top: 20px;
+}
