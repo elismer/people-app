@@ -9,6 +9,7 @@ export default class People extends React.Component {
       peopleList: [],
       person: undefined,
       loading: false,
+      error: null,
     };
   }
 
@@ -16,13 +17,21 @@ export default class People extends React.Component {
     this.setState({
       loading: true,
     });
-    const { people } = await fetch("http://localhost:5050/api/people").then(
-      (response) => response.json()
-    );
-    this.setState({
-      peopleList: people,
-      loading: false,
-    });
+    try {
+      const { people } = await fetch("http://localhost:5050/api/people").then(
+        (response) => response.json()
+      );
+      this.setState({
+        peopleList: people,
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        loading: false,
+        error: error,
+      });
+    }
   }
 
   handleClick = (person) => {
@@ -32,8 +41,15 @@ export default class People extends React.Component {
   };
 
   render() {
-    const { peopleList, person, loading } = this.state;
+    const { peopleList, person, loading, error } = this.state;
     if (loading) return <h1>Cargando...</h1>;
+    if (error)
+      return (
+        <>
+          <h1>Ocurrio un error</h1>
+          <p>{error.message}</p>
+        </>
+      );
     return (
       <div className="list">
         <ListPeople data={peopleList} handleClick={this.handleClick} />

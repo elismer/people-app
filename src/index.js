@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import EditPerson from "./pages/Edit";
 import "./index.css";
 import People from "./pages/People";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <People />
+    {/* <People /> */}
+    <EditPerson />
   </React.StrictMode>,
   document.getElementById("root")
 );
