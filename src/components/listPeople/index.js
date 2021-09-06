@@ -1,17 +1,19 @@
 import React, { useState, useMemo } from "react";
 import FilterPeople from "../filterPeople";
+import { searchPeople } from "../../utils/searchPeople";
 
 const useSearchPeople = (data) => {
   const [query, setQuery] = useState("");
   const [filterPeople, setFilterPeople] = useState(data);
 
   useMemo(() => {
-    const result = data.filter((person) => {
-      console.log({ person: person.first_name.toLowerCase(), query });
-      return query
-        ? person.first_name.toLowerCase().includes(query.toLowerCase())
-        : true;
-    });
+    const [filter, value] = query.split(":");
+    const filterNormalized = filter.toLocaleLowerCase().trim();
+    const valueNormalized = value?.toLocaleLowerCase().trim() || "";
+    const props = { data, query: valueNormalized || filterNormalized };
+    const result = searchPeople[filterNormalized]
+      ? searchPeople[filterNormalized](props)
+      : searchPeople.nombre(props);
     setFilterPeople(result);
   }, [query, data]);
 
@@ -20,14 +22,22 @@ const useSearchPeople = (data) => {
 
 export default function ListPeople({ data, handleClick }) {
   const { query, setQuery, filterPeople } = useSearchPeople(data);
-
+  const [placeHolder, setPlaceHolder] = useState(query);
   const handlerChange = (e) => {
-    setQuery(e.target.value);
+    setPlaceHolder(e.target.value);
+  };
+
+  const handlerSearch = (e) => {
+    setQuery(placeHolder);
   };
 
   return (
     <div>
-      <FilterPeople handlerChange={handlerChange} value={query} />
+      <FilterPeople
+        handlerSearch={handlerSearch}
+        handlerChange={handlerChange}
+        value={placeHolder}
+      />
       <ul>
         {filterPeople.map((person, index) => {
           return (
