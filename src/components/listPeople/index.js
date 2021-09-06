@@ -13,7 +13,8 @@ const useSearchPeople = (data) => {
     const props = { data, query: valueNormalized || filterNormalized };
     const result = searchPeople[filterNormalized]
       ? searchPeople[filterNormalized](props)
-      : searchPeople.nombre(props);
+      : //TODO Busqueda Global
+        searchPeople.nombre(props);
     setFilterPeople(result);
   }, [query, data]);
 
