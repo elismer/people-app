@@ -1,74 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import PersonForm from "../components/editForm";
-import Person from "../components/person";
+import FilterPeople from "../components/filterPeople";
 import { emailValidation } from "../utils/const";
 
-class EditPerson extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: null,
-      data: null,
-      loading: false,
-      error: null,
-    };
-  }
+const EditPerson = (props) => {
+  const [email, setEmail] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!this.stateerror)
-      console.log({ prevState, prevProps, state: this.state });
-  }
-
-  handlerChange = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
+  const handlerChange = (e) => {
+    setEmail(e.target.value);
   };
 
-  handlerSearch = async (e) => {
-    const { email } = this.state;
+  const handlerSearch = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (!email.match(emailValidation)) throw new Error("email invalido");
       const { person } = await fetch(
         `http://localhost:5050/api/people/${email}`
       ).then((response) => response.json());
-      this.setState({
-        data: person,
-        loading: false,
-        error: false,
-      });
+      setData(person);
+      setLoading(false);
+      setError(null);
+      // this.setState({
+      //   data: person,
+      //   loading: false,
+      //   error: false,
+      // });
     } catch (error) {
       console.error(error);
-      this.setState({
-        loading: false,
-        error: error,
-        data: null,
-      });
+      setLoading(false);
+      setError(error);
+      // this.setState({
+      //   loading: false,
+      //   error: error,
+      //   data: null,
+      // });
     }
   };
 
-  handleSumbit = (values) => {};
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    alert("Persona modificada");
+  };
 
-  render() {
-    const { data, error } = this.state;
-    return (
-      <div>
-        <input onChange={this.handlerChange} />
-        <button onClick={this.handlerSearch}>Buscar</button>
-        {error && <p>Error: {error.message}</p>}
-        {data && (
-          <PersonForm
-            {...data}
-            handleSubmit={(e) => {
-              e.preventDefault();
-              alert("");
-            }}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <FilterPeople
+        handlerChange={handlerChange}
+        handlerSearch={handlerSearch}
+      />
+      {loading && <h1>Cargando...</h1>}
+      {error && <p>Error: {error.message}</p>}
+      {data && <PersonForm {...data} handleSubmit={handleSumbit} />}
+    </div>
+  );
+};
 
 export default EditPerson;

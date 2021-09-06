@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <People /> */}
+    <People />
     <EditPerson />
   </React.StrictMode>,
   document.getElementById("root")
