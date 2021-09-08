@@ -1,14 +1,14 @@
+import { Container } from "@material-ui/core";
 import React from "react";
 import ReactDOM from "react-dom";
-import EditPerson from "./pages/Edit";
-import "./index.css";
-import People from "./pages/People";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <People />
-    <EditPerson />
+    <Container>
+      <App />
+    </Container>
   </React.StrictMode>,
   document.getElementById("root")
 );

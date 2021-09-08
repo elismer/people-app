@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import FilterPeople from "../filterPeople";
 import { searchPeople } from "../../utils/searchPeople";
+import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 
 const useSearchPeople = (data) => {
   const [query, setQuery] = useState("");
@@ -39,15 +40,17 @@ export default function ListPeople({ data, handleClick }) {
         handlerChange={handlerChange}
         value={placeHolder}
       />
-      <ul>
-        {filterPeople.map((person, index) => {
-          return (
-            <li key={index} onClick={() => handleClick(person)}>
-              <p> Nombre: {person.first_name} </p>
-            </li>
-          );
-        })}
-      </ul>
+      <Table>
+        <TableBody>
+          {filterPeople.map((person, index) => {
+            return (
+              <TableRow key={index} onClick={() => handleClick(person)}>
+                <TableCell>{person.first_name}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 }
