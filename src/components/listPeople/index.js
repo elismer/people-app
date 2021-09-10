@@ -1,8 +1,23 @@
 import React, { useState, useMemo } from "react";
 import FilterPeople from "../filterPeople";
 import { searchPeople } from "../../utils/searchPeople";
-import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  makeStyles,
+  TableContainer,
+} from "@material-ui/core";
 
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
+});
 const useSearchPeople = (data) => {
   const [query, setQuery] = useState("");
   const [filterPeople, setFilterPeople] = useState(data);
@@ -33,24 +48,27 @@ export default function ListPeople({ data, handleClick }) {
     setQuery(placeHolder);
   };
 
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <FilterPeople
         handlerSearch={handlerSearch}
         handlerChange={handlerChange}
         value={placeHolder}
       />
-      <Table>
-        <TableBody>
-          {filterPeople.map((person, index) => {
-            return (
-              <TableRow key={index} onClick={() => handleClick(person)}>
-                <TableCell>{person.first_name}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+      <TableContainer className={classes.container}>
+        <Table aria-label="sticky table">
+          <TableBody>
+            {filterPeople.map((person, index) => {
+              return (
+                <TableRow key={index} onClick={() => handleClick(person)}>
+                  <TableCell>{person.first_name}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

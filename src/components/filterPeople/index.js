@@ -30,7 +30,7 @@ export default function FilterPeople({ handlerChange, handlerSearch, value }) {
   const classes = useStyle();
   return (
     <div className={classes.div}>
-      <TextField onChange={handlerChange} value={value} />
+      <TextField onChange={handlerChange} variant="outlined" value={value} />
       <Button
         className={classes.root}
         onClick={handlerSearch}

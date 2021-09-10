@@ -1,7 +1,6 @@
 export const searchPeople = {
   nombre: ({ data, query }) => {
     return data.filter((person) => {
-      console.log("search", { data, query });
       return query
         ? person.first_name.toLowerCase().includes(query.toLowerCase())
         : true;

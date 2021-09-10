@@ -9,27 +9,38 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "'center',",
   },
+  person: {
+    background: "white",
+    position: "sticky",
+    top: 20,
+    bottom: 20,
+    marginLeft: "5px",
+    paddingTop: "40px",
+    paddingBottom: "40px",
+    zIndex: 5,
+  },
 }));
 const People = () => {
   const [peopleList, setPeopleList] = useState([]);
   const [person, setPerson] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  console.log({ peopleList });
   useEffect(() => {
     const getPeopleList = async () => {
       setLoading(true);
-      try {
-        const { people } = await fetch("http://localhost:5050/api/people").then(
-          (response) => response.json()
-        );
-        setPeopleList(people);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-        setError(error);
-      }
+      if (peopleList)
+        try {
+          const { people } = await fetch(
+            "http://localhost:5050/api/people"
+          ).then((response) => response.json());
+          setPeopleList(people);
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
+          setError(error);
+        }
     };
     getPeopleList();
   }, []);
@@ -52,7 +63,7 @@ const People = () => {
   return (
     <div className={clasess.list}>
       <ListPeople data={peopleList} handleClick={handleClick} />
-      {person && <Person {...person} className="personItem" />}
+      <div>{person && <Person {...person} className={clasess.person} />}</div>
     </div>
   );
 };
