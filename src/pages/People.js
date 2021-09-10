@@ -20,37 +20,13 @@ const useStyle = makeStyles((theme) => ({
     zIndex: 5,
   },
 }));
-const People = () => {
-  const [peopleList, setPeopleList] = useState([]);
+const People = ({ peopleList, error, loading }) => {
   const [person, setPerson] = useState(undefined);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  console.log({ peopleList });
-  useEffect(() => {
-    const getPeopleList = async () => {
-      setLoading(true);
-      if (peopleList)
-        try {
-          const { people } = await fetch(
-            "http://localhost:5050/api/people"
-          ).then((response) => response.json());
-          setPeopleList(people);
-          setLoading(false);
-        } catch (error) {
-          console.error(error);
-          setLoading(false);
-          setError(error);
-        }
-    };
-    getPeopleList();
-  }, []);
 
   const handleClick = (person) => {
-    // this.setState({
-    //   person,
-    // });
     setPerson(person);
   };
+
   const clasess = useStyle();
   if (loading) return <h1>Cargando...</h1>;
   if (error)
