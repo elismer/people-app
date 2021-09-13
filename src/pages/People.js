@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ListPeople from "../components/listPeople";
 import Person from "../components/person";
 import { makeStyles } from "@material-ui/core";
@@ -7,7 +7,7 @@ const useStyle = makeStyles((theme) => ({
   list: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "'center',",
+    alignItems: "center",
   },
   person: {
     background: "white",

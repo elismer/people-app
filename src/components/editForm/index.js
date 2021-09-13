@@ -1,4 +1,19 @@
+import { TextField, makeStyles, Card } from "@material-ui/core";
 import React, { useState } from "react";
+
+const useStyle = makeStyles((theme) => ({
+  card: {
+    width: "350px",
+    padding: "15px",
+    margin: "10px",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
 
 const PersonForm = ({
   first_name,
@@ -25,52 +40,44 @@ const PersonForm = ({
   const [lastNameState, setLastNameState] = useState(last_name);
   const [emailState, setEmailState] = useState(email);
   const [genderState, setGenderState] = useState(gender);
-  const [ipAddresState, setIpAddresState] = useState(ip_address);
-
+  const [ipAddressState, setIpAddressState] = useState(ip_address);
+  const classes = useStyle();
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
+    <Card className={classes.card}>
+      <form onSubmit={handleSubmit} className={classes.form}>
+        <TextField
+          label="Name"
           type="text"
           value={firstNameState}
           onChange={(e) => setFirstNameState(e.target.value)}
         />
-      </label>
-      <label>
-        Lastname:
-        <input
+        <TextField
+          label="Lastname"
           type="text"
           value={lastNameState}
           onChange={(e) => setLastNameState(e.target.value)}
         />
-      </label>
-      <label>
-        email:
-        <input
+        <TextField
+          label="email"
           type="text"
           value={emailState}
           onChange={(e) => setEmailState(e.target.value)}
         />
-      </label>
-      <label>
-        gender:
-        <input
+        <TextField
+          label="gender"
           type="text"
           value={genderState}
           onChange={(e) => setGenderState(e.target.value)}
         />
-      </label>
-      <label>
-        IP Address:
-        <input
+        <TextField
+          label="IP Address"
           type="text"
-          value={ipAddresState}
-          onChange={(e) => setIpAddresState(e.target.value)}
+          value={ipAddressState}
+          onChange={(e) => setIpAddressState(e.target.value)}
         />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+        <input type="submit" value="Submit" />
+      </form>
+    </Card>
   );
 };
 
