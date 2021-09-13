@@ -8,6 +8,6 @@ const getPeople = async () => {
   return people;
 };
 
-export default function usePersonList() {
+export default function usePeopleList() {
   return useQuery("getPeopleList", getPeople);
 }

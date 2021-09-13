@@ -2,7 +2,7 @@ import EditPerson from "./pages/Edit";
 import People from "./pages/People";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/header";
-import usePersonList from "./hooks/usePersonList";
+import usePeopleList from "./hooks/usePeopleList";
 function App() {
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState(null);
@@ -26,7 +26,7 @@ function App() {
   //   getPeopleList();
   // }, []);
 
-  const { isLoading, error, data } = usePersonList();
+  const { isLoading, error, data } = usePeopleList();
   return (
     <Router>
       <Header />

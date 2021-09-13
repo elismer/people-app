@@ -1,4 +1,4 @@
-import { TextField, makeStyles, Card } from "@material-ui/core";
+import { TextField, makeStyles, Card, Button } from "@material-ui/core";
 import React, { useState } from "react";
 
 const useStyle = makeStyles((theme) => ({
@@ -12,6 +12,9 @@ const useStyle = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    marginTop: "10px",
   },
 }));
 
@@ -75,7 +78,9 @@ const PersonForm = ({
           value={ipAddressState}
           onChange={(e) => setIpAddressState(e.target.value)}
         />
-        <input type="submit" value="Submit" />
+        <Button variant="contained" className={classes.button} type="submit">
+          Enviar
+        </Button>
       </form>
     </Card>
   );
